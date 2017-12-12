@@ -17,7 +17,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,  // Do not load files in node_modules folder
         query: {                  // What you want to interpret
-          presets: ['es2015'],
+          presets: ['es2015', 'react'],
           plugins: ['transform-object-rest-spread']  // Plugin to transpile the ...spread operator
         } 
       }

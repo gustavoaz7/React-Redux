@@ -1,13 +1,5 @@
-const pen = {
-  description: 'Blue pen',
-  price: 1.10,
-  off: 0.05
-}
+import 'react'
 
-function clone(obj) {
-  return { ...obj }
-}
+export default props => null;
 
-const myPen = clone(pen)
-myPen.description = 'Black pen'
-console.log(myPen)
+console.log('It there an error ?');
