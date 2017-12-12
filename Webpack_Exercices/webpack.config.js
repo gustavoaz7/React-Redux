@@ -9,5 +9,17 @@ module.exports = {
   devServer: {                    // Webpack server
     port: 8080,
     contentBase: './public'       // Same path as bundle.js file
+  },
+  module: {
+    loaders: [
+      {
+        test: /.js?$/,          // Testing file extension
+        loader: 'babel-loader',
+        exclude: /node_modules/,  // Do not load files in node_modules folder
+        query: {                  // What you want to interpret
+          presets: ['es2015']
+        } 
+      }
+    ]
   }
 }
