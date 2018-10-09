@@ -11,6 +11,7 @@ module.exports = {
     port: 8080,
     contentBase: './public'       // Same path as bundle.js file
   },
+  mode: 'development',
   plugins: [
     new ExtractTextPlugin({
       filename: 'app.css'
@@ -23,8 +24,8 @@ module.exports = {
         exclude: /node_modules/,  // Do not load files in node_modules folder
         use: {
           loader: 'babel-loader',
-          query: {                  // What you want to interpret
-            presets: ['es2015', 'react'],
+          options: {                  // What you want to interpret
+            presets: ['react'],
             plugins: ['transform-object-rest-spread']  // Plugin to transpile the ...spread operator
           }
         }
