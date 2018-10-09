@@ -12,22 +12,29 @@ module.exports = {
     contentBase: './public'       // Same path as bundle.js file
   },
   plugins: [
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin({
+      filename: 'app.css'
+    })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /.js?$/,          // Testing file extension
-        loader: 'babel-loader',
         exclude: /node_modules/,  // Do not load files in node_modules folder
-        query: {                  // What you want to interpret
-          presets: ['es2015', 'react'],
-          plugins: ['transform-object-rest-spread']  // Plugin to transpile the ...spread operator
+        use: {
+          loader: 'babel-loader',
+          query: {                  // What you want to interpret
+            presets: ['es2015', 'react'],
+            plugins: ['transform-object-rest-spread']  // Plugin to transpile the ...spread operator
+          }
         }
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ]
   }

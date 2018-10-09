@@ -18,24 +18,32 @@ module.exports = {
     }
   },
   plugins: [
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin({
+      filename: 'app.css'
+    })
   ],
   module: {
-    loaders: [{
+    rules: [{
       test: /.js[x]?$/,
-      loader: 'babel-loader',
       exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react'],
-        plugins: ['transform-object-rest-spread']
+      use: {
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react'],
+          plugins: ['transform-object-rest-spread']
+        }
       }
     }, {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader'
+      })
     }, {
       test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
-      loader: 'file'
+      use: {
+        loader: 'file'
+      }
     }]
   }
-
 }

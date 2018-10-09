@@ -10,18 +10,21 @@ module.exports = {
     port: 8080,
     contentBase: './public'
   },
-  resolve:{
+  mode: 'development',
+  resolve: {
     extensions: ['', '.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /.jsx?$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: ['transform-object-rest-spread']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react'],
+            plugins: ['transform-object-rest-spread']
+          }
         }
       }
     ]
