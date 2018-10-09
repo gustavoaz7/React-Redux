@@ -2,17 +2,21 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: [
+    './src/index.jsx',
+    'font-awesome/scss/font-awesome.scss'
+  ],
   output: {
     path: __dirname + '/public',
-    file: './bundle.js'
+    filename: './bundle.js'
   },
   devServer: {
     port: 8080,
     contentBase: './public'
   },
+  mode: 'production',
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
       modules: __dirname + '/node_modules'
     }
@@ -28,22 +32,31 @@ module.exports = {
       exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react'],
+        options: {
+          presets: ['react'],
           plugins: ['transform-object-rest-spread']
         }
       }
     }, {
-      test: /\.css$/,
+      test: /\.css$|.scss$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader'
+        use: [
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
+        ]
       })
     }, {
       test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
       use: {
-        loader: 'file'
+        loader: 'file-loader'
       }
-    }]
+    }, {
+      test: /font-awesome\.config\.js/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'font-awesome-loader' }
+      ]
+    },]
   }
 }
