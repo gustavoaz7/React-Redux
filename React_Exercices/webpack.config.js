@@ -12,7 +12,7 @@ module.exports = {
   },
   mode: 'development',
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
@@ -22,7 +22,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'react'],
+            presets: ['react'],
             plugins: ['transform-object-rest-spread']
           }
         }
